@@ -1,31 +1,24 @@
 require('dotenv').config();
-const setTimeout = require('timers/promises').setTimeout;
 const transferCall = require('../functions/transferCall');
 
+// Mock the twilio client
+const mockUpdate = jest.fn().mockResolvedValue({});
+const mockCalls = jest.fn(() => ({
+  update: mockUpdate,
+}));
+jest.mock('twilio', () => {
+  return jest.fn(() => ({
+    calls: mockCalls,
+  }));
+});
+
 test('Expect transferCall to successfully redirect call', async () => {
+  const callSid = 'CA12345678901234567890123456789012';
+  const transferResult = await transferCall({callSid});
 
-  async function makeOutBoundCall() {
-    const accountSid = process.env.TWILIO_ACCOUNT_SID;
-    const authToken = process.env.TWILIO_AUTH_TOKEN;
-        
-    const client = require('twilio')(accountSid, authToken);
-      
-    const sid = await client.calls
-      .create({
-        url: `https://${process.env.SERVER}/incoming`,
-        to: process.env.YOUR_NUMBER,
-        from: process.env.FROM_NUMBER
-      })
-      .then(call => call.sid);
-    
-    return sid;
-  }
-
-  const callSid = await makeOutBoundCall();
-  console.log(callSid);
-  await setTimeout(10000);
-  
-  const transferResult = await transferCall(callSid);
-
+  expect(mockCalls).toHaveBeenCalledWith(callSid);
+  expect(mockUpdate).toHaveBeenCalledWith({
+    twiml: `<Response><Dial>${process.env.TRANSFER_NUMBER}</Dial></Response>`,
+  });
   expect(transferResult).toBe('The call was transferred successfully');
-}, 20000);
+});

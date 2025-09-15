@@ -1,7 +1,16 @@
 const EventEmitter = require('events');
 const uuid = require('uuid');
 
+/**
+ * @class StreamService
+ * @description A service that handles the streaming of audio data.
+ * @extends EventEmitter
+ */
 class StreamService extends EventEmitter {
+  /**
+   * Creates an instance of StreamService.
+   * @param {*} websocket - The websocket connection.
+   */
   constructor(websocket) {
     super();
     this.ws = websocket;
@@ -10,10 +19,19 @@ class StreamService extends EventEmitter {
     this.streamSid = '';
   }
 
+  /**
+   * Sets the stream SID.
+   * @param {string} streamSid - The stream SID.
+   */
   setStreamSid (streamSid) {
     this.streamSid = streamSid;
   }
 
+  /**
+   * Buffers the audio data.
+   * @param {number} index - The index of the audio data.
+   * @param {string} audio - The audio data.
+   */
   buffer (index, audio) {
     // Escape hatch for intro message, which doesn't have an index
     if(index === null) {
@@ -32,6 +50,10 @@ class StreamService extends EventEmitter {
     }
   }
 
+  /**
+   * Sends the audio data.
+   * @param {string} audio - The audio data.
+   */
   sendAudio (audio) {
     this.ws.send(
       JSON.stringify({

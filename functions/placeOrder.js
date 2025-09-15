@@ -1,3 +1,10 @@
+/**
+ * Places an order for a given model and quantity.
+ * @param {object} functionArgs - The arguments for the function.
+ * @param {string} functionArgs.model - The model to place an order for.
+ * @param {number} functionArgs.quantity - The number of items to order.
+ * @returns {string} A JSON string containing the order number and price.
+ */
 async function placeOrder(functionArgs) {
   const {model, quantity} = functionArgs;
   console.log('GPT -> called placeOrder function');

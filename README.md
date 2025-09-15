@@ -10,7 +10,31 @@ This app serves as a demo exploring two services:
 
 These service combine to create a voice application that is remarkably better at transcribing, understanding, and speaking than traditional IVR systems.
 
-Features:
+## Table of Contents
+- [Features](#features)
+- [Setting up for Development](#setting-up-for-development)
+  - [Prerequisites](#prerequisites)
+  - [1. Start Ngrok](#1-start-ngrok)
+  - [2. Configure Environment Variables](#2-configure-environment-variables)
+  - [3. Install Dependencies with NPM](#3-install-dependencies-with-npm)
+  - [4. Start Your Server in Development Mode](#4-start-your-server-in-development-mode)
+  - [5. Configure an Incoming Phone Number](#5-configure-an-incoming-phone-number)
+- [Application Workflow](#application-workflow)
+- [Modifying the ChatGPT Context & Prompt](#modifying-the-chatgpt-context--prompt)
+  - [About the `system` Attribute](#about-the-system-attribute)
+  - [About the `content` Attribute](#about-the-content-attribute)
+- [Using Function Calls with GPT](#using-function-calls-with-gpt)
+  - [How Function Calling Works](#how-function-calling-works)
+  - [Adding Custom Function Calls](#adding-custom-function-calls)
+  - [Receiving Function Arguments](#receiving-function-arguments)
+  - [Returning Arguments to GPT](#returning-arguments-to-gpt)
+- [Utility Scripts for Placing Calls](#utility-scripts-for-placing-calls)
+- [Using Eleven Labs for Text to Speech](#using-eleven-labs-for-text-to-speech)
+- [Testing with Jest](#testing-with-jest)
+- [Deploy via Fly.io](#deploy-via-flyio)
+- [Code Documentation](#code-documentation)
+
+## Features
 - 🏁 Returns responses with low latency, typically 1 second by utilizing streaming.
 - ❗️ Allows the user to interrupt the GPT assistant and ask a different question.
 - 📔 Maintains chat history with GPT.
@@ -289,3 +313,13 @@ Import your secrets from your .env file to your deployed app:
 ```bash
 fly secrets import < .env
 ```
+
+## Code Documentation
+This repository is fully documented using JSDoc. You can generate a complete documentation website by running the following command:
+
+```bash
+npm install -g jsdoc
+jsdoc .
+```
+
+This will generate a `out` directory containing the documentation website.

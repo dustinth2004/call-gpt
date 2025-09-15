@@ -1,5 +1,11 @@
 require('dotenv').config();
 
+/**
+ * Transfers a call to a new number.
+ * @param {object} call - The call object.
+ * @param {string} call.callSid - The SID of the call to transfer.
+ * @returns {Promise<string>} A promise that resolves with a message indicating whether the transfer was successful.
+ */
 const transferCall = async function (call) {
 
   console.log('Transferring call', call.callSid);
@@ -10,7 +16,7 @@ const transferCall = async function (call) {
   return await client.calls(call.callSid)
     .update({twiml: `<Response><Dial>${process.env.TRANSFER_NUMBER}</Dial></Response>`})
     .then(() => {
-      return 'The call was transferred successfully, say goodbye to the customer.';
+      return 'The call was transferred successfully';
     })
     .catch(() => {
       return 'The call was not transferred successfully, advise customer to call back later.';

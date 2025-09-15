@@ -1,3 +1,9 @@
+/**
+ * Checks the price for a given model.
+ * @param {object} functionArgs - The arguments for the function.
+ * @param {string} functionArgs.model - The model to check the price for.
+ * @returns {string} A JSON string containing the price information.
+ */
 async function checkPrice(functionArgs) {
   let model = functionArgs.model;
   console.log('GPT -> called checkPrice function');

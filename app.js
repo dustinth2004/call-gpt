@@ -1,3 +1,7 @@
+/**
+ * @file This file is the main entry point for the application.
+ * @description This file sets up the express server, and handles the incoming and websocket connections.
+ */
 require('dotenv').config();
 require('colors');
 
@@ -17,6 +21,11 @@ ExpressWs(app);
 
 const PORT = process.env.PORT || 3000;
 
+/**
+ * @description This route handles incoming calls.
+ * @param {object} req - The request object.
+ * @param {object} res - The response object.
+ */
 app.post('/incoming', (req, res) => {
   try {
     const response = new VoiceResponse();
@@ -30,6 +39,10 @@ app.post('/incoming', (req, res) => {
   }
 });
 
+/**
+ * @description This route handles the websocket connection.
+ * @param {object} ws - The websocket object.
+ */
 app.ws('/connection', (ws) => {
   try {
     ws.on('error', console.error);
