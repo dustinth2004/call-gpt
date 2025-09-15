@@ -3,13 +3,28 @@ const { Buffer } = require('node:buffer');
 const EventEmitter = require('events');
 const fetch = require('node-fetch');
 
+/**
+ * @class TextToSpeechService
+ * @description A service that handles text-to-speech conversion.
+ * @extends EventEmitter
+ */
 class TextToSpeechService extends EventEmitter {
+  /**
+   * Creates an instance of TextToSpeechService.
+   */
   constructor() {
     super();
     this.nextExpectedIndex = 0;
     this.speechBuffer = {};
   }
 
+  /**
+   * Generates audio from text.
+   * @param {object} gptReply - The GPT reply object.
+   * @param {number} gptReply.partialResponseIndex - The index of the partial response.
+   * @param {string} gptReply.partialResponse - The partial response text.
+   * @param {number} interactionCount - The interaction count.
+   */
   async generate(gptReply, interactionCount) {
     const { partialResponseIndex, partialResponse } = gptReply;
 

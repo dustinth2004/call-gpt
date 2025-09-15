@@ -1,10 +1,13 @@
-/*
-  You can use this script to place an outbound call
-  to your own mobile phone.
-*/
+/**
+ * @file This file contains a script to make an outbound call from the application.
+ * @description This script is used to test the application by making an outbound call to a specified number.
+ */
 
 require('dotenv').config();
 
+/**
+ * Makes an outbound call from the application.
+ */
 async function makeOutBoundCall() {
   const accountSid = process.env.TWILIO_ACCOUNT_SID;
   const authToken = process.env.TWILIO_AUTH_TOKEN;

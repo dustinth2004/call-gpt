@@ -1,3 +1,9 @@
+/**
+ * Checks the inventory for a given model.
+ * @param {object} functionArgs - The arguments for the function.
+ * @param {string} functionArgs.model - The model to check inventory for.
+ * @returns {string} A JSON string containing the stock information.
+ */
 async function checkInventory(functionArgs) {
   const model = functionArgs.model;
   console.log('GPT -> called checkInventory function');

@@ -1,3 +1,9 @@
+/**
+ * @file This file contains the function manifest for the application.
+ * @description The function manifest is a list of all the available functions that can be called by the GPT model.
+ * It is used to provide the model with the necessary information to call the functions, such as the function name, description, parameters, and return values.
+ */
+
 // create metadata for all the available functions to pass to completions API
 const tools = [
   {

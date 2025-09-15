@@ -4,7 +4,15 @@ const { Buffer } = require('node:buffer');
 const EventEmitter = require('events');
 
 
+/**
+ * @class TranscriptionService
+ * @description A service that handles the transcription of audio data.
+ * @extends EventEmitter
+ */
 class TranscriptionService extends EventEmitter {
+  /**
+   * Creates an instance of TranscriptionService.
+   */
   constructor() {
     super();
     const deepgram = createClient(process.env.DEEPGRAM_API_KEY);

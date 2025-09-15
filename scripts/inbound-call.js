@@ -1,8 +1,13 @@
 require('dotenv').config();
 
-// You can use this function to make a
-// test call to your application by running
-// npm inbound
+/**
+ * @file This file contains a script to make an inbound test call to the application.
+ * @description This script is used to test the application by making an inbound call and speaking a pre-defined script.
+ */
+
+/**
+ * Makes an inbound test call to the application.
+ */
 async function makeInboundCall() {
   const VoiceResponse = require('twilio').twiml.VoiceResponse;
   const accountSid = process.env.TWILIO_ACCOUNT_SID;

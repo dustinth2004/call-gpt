@@ -1,6 +1,11 @@
 
 require('colors');
 
+/**
+ * Starts a recording of the call.
+ * @param {object} ttsService - The text-to-speech service.
+ * @param {string} callSid - The SID of the call to record.
+ */
 async function recordingService(ttsService, callSid) {
   try {
     if (process.env.RECORDING_ENABLED === 'true') {

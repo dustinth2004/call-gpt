@@ -11,7 +11,15 @@ tools.forEach((tool) => {
   availableFunctions[functionName] = require(`../functions/${functionName}`);
 });
 
+/**
+ * @class GptService
+ * @description A service that interacts with the OpenAI GPT API.
+ * @extends EventEmitter
+ */
 class GptService extends EventEmitter {
+  /**
+   * Creates an instance of GptService.
+   */
   constructor() {
     super();
     this.openai = new OpenAI();
@@ -22,12 +30,19 @@ class GptService extends EventEmitter {
     this.partialResponseIndex = 0;
   }
 
-  // Add the callSid to the chat context in case
-  // ChatGPT decides to transfer the call.
+  /**
+   * Sets the call SID in the user context.
+   * @param {string} callSid - The call SID.
+   */
   setCallSid (callSid) {
     this.userContext.push({ 'role': 'system', 'content': `callSid: ${callSid}` });
   }
 
+  /**
+   * Validates the function arguments.
+   * @param {string} args - The function arguments.
+   * @returns {object} The parsed function arguments.
+   */
   validateFunctionArgs (args) {
     try {
       return JSON.parse(args);
@@ -40,6 +55,12 @@ class GptService extends EventEmitter {
     }
   }
 
+  /**
+   * Updates the user context with a new message.
+   * @param {string} name - The name of the user.
+   * @param {string} role - The role of the user.
+   * @param {string} text - The text of the message.
+   */
   updateUserContext(name, role, text) {
     if (name !== 'user') {
       this.userContext.push({ 'role': role, 'name': name, 'content': text });
@@ -48,6 +69,13 @@ class GptService extends EventEmitter {
     }
   }
 
+  /**
+   * Generates a completion from the GPT model.
+   * @param {string} text - The text to generate a completion for.
+   * @param {number} interactionCount - The number of interactions.
+   * @param {string} [role='user'] - The role of the user.
+   * @param {string} [name='user'] - The name of the user.
+   */
   async completion(text, interactionCount, role = 'user', name = 'user') {
     this.updateUserContext(name, role, text);
 
